@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FashionVibe</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap');
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fdf9f9;
+    }
+
+    header {
+      background: linear-gradient(90deg, #3e206d, #9c27b0);
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container img {
+      height: 60px;
+      margin-right: 15px;
+      border-radius: 10px;
+      border: 2px solid white;
+    }
+
+    .logo-container h1 {
+      margin: 0;
+      font-size: 2.2em;
+      font-family: 'Playfair Display', serif;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-block;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffe6ec;
+      transform: scale(1.1);
+    }
+
+    .header-icons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-left: 20px;
+    }
+
+    .header-icons img {
+      width: 26px;
+      height: 26px;
+      cursor: pointer;
+      filter: invert(1);
+      transition: transform 0.2s;
+    }
+
+    .header-icons img:hover {
+      transform: scale(1.2);
+    }
+
+    .banner {
+      width: 100%;
+      height: auto;
+      margin: 0;
+      display: block;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin: 40px;
+    }
+
+    .product-item {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+
+    .product-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-item img {
+      width: 100%;
+      border-radius: 10px;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .product-item h3 {
+      font-family: 'Playfair Display', serif;
+      margin: 10px 0 5px;
+      font-size: 1.2em;
+    }
+
+    .product-item p {
+      color: #888;
+      font-size: 0.95em;
+    }
+
+    .price {
+      color: #000;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .add-to-cart {
+      background-color: #9c27b0;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .add-to-cart:hover {
+      background-color: #7b1fa2;
+    }
+
+    section {
+      margin: 40px;
+    }
+
+    #about, #contact {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      margin: 40px;
+    }
+
+    #about h2, #contact h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #3e206d;
+    }
+
+    #about p {
+      font-size: 1em;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input, textarea {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+
+    button[type="submit"] {
+      background-color: #9c27b0;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #7b1fa2;
+    }
+
+    footer {
+      background: #3e206d;
+      color: #fff;
+      padding: 30px 40px;
+      text-align: center;
+      font-size: 0.9em;
+      margin-top: 60px;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cartButtons = document.querySelectorAll(".add-to-cart");
+
+      cartButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          const product = button.parentElement.querySelector("h3").textContent;
+          alert(`${product} has been added to your cart!`);
+        });
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function(e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth"
+          });
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="https://i.pinimg.com/564x/68/ec/e3/68ece3547035aae711908da603bf33c6.jpg" alt="FashionVibe Logo">
+      <h1>FashionVibe</h1>
+    </div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <div class="header-icons">
+        <img src="https://cdn-icons-png.flaticon.com/512/891/891462.png" alt="Cart">
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="User Login">
+      </div>
+    </nav>
+  </header>
+
+  <img class="banner" src="https://t3.ftcdn.net/jpg/03/67/56/64/360_F_367566423_XT7p8nSweLhTPMBZkqaDmQXhXujeS4Gq.jpg" alt="Fashion Banner">
+
+  <section class="product-grid" id="products">
+    <div class="product-item">
+      <img src="https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/26493998/2024/3/21/ef17cf2d-c388-443b-94b1-a660a1e7e5261711008312277-ONLY-Boxy-Spread-Collar-Casual-Shirt-1051711008312160-15.jpg" alt="Casual Shirt">
+      <h3>Casual Shirt</h3>
+      <p>Comfortable cotton shirt perfect for daily wear.</p>
+      <p class="price">₹799</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-item">
+      <img src="https://m.media-amazon.com/images/I/712EkIlVb7L._AC_UY1100_.jpg" alt="Classic Denim Jacket">
+      <h3>Denim Jacket</h3>
+      <p>Stylish and durable denim jacket for a bold look.</p>
+      <p class="price">₹1599</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-item">
+      <img src="https://media.istockphoto.com/id/1170648040/photo/beautiful-lady-overjoyed-by-warm-spring-breeze-dream-of-romantic-date-wear-cute-floral-dress.jpg?s=612x612&w=0&k=20&c=UzOoNF1-F6pR5uSu6mTqnPAYR4eg6paDy4FKfhYVInU=" alt="Summer Dress">
+      <h3>Summer Dress</h3>
+      <p>Floral dress made with soft breathable fabric.</p>
+      <p class="price">₹999</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+  </section>
+
+  <section id="testimonials" style="background-color: #f9f1ff; padding: 40px; border-radius: 12px; margin: 40px;">
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 2em; color: #3e206d; margin-bottom: 20px;">What Our Customers Say</h2>
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <blockquote style="font-style: italic; color: #555;">"Loved the summer dress! Great fabric and fit." – Aditi R.</blockquote>
+      <blockquote style="font-style: italic; color: #555;">"Quick delivery and beautiful packaging. Highly recommend!" – Mehul S.</blockquote>
+    </div>
+  </section>
+
+  <section style="background: #f3e5f5; padding: 40px; margin: 40px; border-radius: 12px; text-align: center;">
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8em; color: #3e206d;">Stay in Style</h2>
+    <p>Subscribe to our newsletter for new arrivals and exclusive deals!</p>
+    <input type="email" placeholder="Your Email" style="padding: 10px; border-radius: 6px; border: 1px solid #ccc; width: 250px; margin-top: 10px;" />
+    <button style="background-color: #9c27b0; color: white; border: none; padding: 10px 16px; margin-left: 10px; border-radius: 6px; cursor: pointer;">Subscribe</button>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p> Welcome to FashionVibe — your ultimate destination for trendsetting fashion that speaks your language. At FashionVibe, we believe that fashion isn't just about clothes — it's a lifestyle, a personality, and a powerful way to express yourself. Founded with a vision to make contemporary style accessible to everyone, we have grown into a platform where quality meets affordability and elegance blends with comfort.
+        <br><br>
+        Our journey started with a small team of fashion enthusiasts determined to disrupt the norms of the industry by offering curated styles, timeless staples, and seasonal collections all under one roof. Today, Fashion Hub caters to thousands of customers nationwide who trust us for their everyday outfits, special occasions, and fashion-forward looks.
+        <br><br>
+        We are committed to bringing you the finest materials, exceptional craftsmanship, and unique designs sourced from both global and local creators. Every item in our catalog goes through rigorous quality checks to ensure that when you shop with us, you're not just buying clothes — you're investing in confidence.
+        <br><br>
+        What sets us apart is our customer-centric approach. From seamless navigation to smooth checkout and quick delivery, we strive to make your shopping experience delightful at every step. Our responsive support team is always ready to assist you with styling tips, order inquiries, or size recommendations.
+        <br><br>
+        Thank you for being a part of the Fashion Hub family. We invite you to explore, experiment, and express yourself — because at FashionVibe, your style story matters.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="position: fixed; bottom: 20px; right: 20px; background: #9c27b0; color: white; border: none; border-radius: 50%; padding: 12px 16px; font-size: 1.2em; cursor: pointer;">↑</button>
+
+  <footer>
+    &copy; 2025 FashionVibe. All rights reserved.
+  </footer>
+</body>
+</html>
