@@ -3,9 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FashionVibe</title>
+  <title>FashionVibe - Trendsetting Online Fashion Store</title>
+  <meta name="description" content="Discover stylish, affordable fashion at FashionVibe. Shop dresses, jackets, shirts and more with fast delivery.">
+  <meta name="keywords" content="FashionVibe, fashion, online shopping, clothing, dresses, shirts, jackets">
+  <meta name="author" content="FashionVibe Team">
+  <link rel="icon" href="https://i.pinimg.com/564x/68/ec/e3/68ece3547035aae711908da603bf33c6.jpg" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Roboto', sans-serif;
@@ -17,11 +25,14 @@
     header {
       background: linear-gradient(90deg, #3e206d, #9c27b0);
       color: #fff;
-      padding: 20px 40px;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
@@ -31,17 +42,16 @@
     }
 
     .logo-container img {
-      height: 60px;
-      margin-right: 15px;
+      height: 50px;
+      margin-right: 10px;
       border-radius: 10px;
       border: 2px solid white;
     }
 
     .logo-container h1 {
-      margin: 0;
-      font-size: 2.2em;
+      font-size: 1.8em;
       font-family: 'Playfair Display', serif;
-      color: #fff;
+      margin: 0;
       letter-spacing: 1px;
     }
 
@@ -55,7 +65,6 @@
       margin-left: 20px;
       text-decoration: none;
       font-weight: 500;
-      display: inline-block;
       transition: color 0.3s, transform 0.3s;
     }
 
@@ -64,16 +73,10 @@
       transform: scale(1.1);
     }
 
-    .header-icons {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-left: 20px;
-    }
-
     .header-icons img {
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
+      margin-left: 15px;
       cursor: pointer;
       filter: invert(1);
       transition: transform 0.2s;
@@ -83,10 +86,28 @@
       transform: scale(1.2);
     }
 
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      background: white;
+      height: 3px;
+      width: 25px;
+      margin: 4px 0;
+      border-radius: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
     .banner {
       width: 100%;
       height: auto;
-      margin: 0;
       display: block;
     }
 
@@ -94,7 +115,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 30px;
-      margin: 40px;
+      padding: 40px;
     }
 
     .product-item {
@@ -120,13 +141,13 @@
 
     .product-item h3 {
       font-family: 'Playfair Display', serif;
-      margin: 10px 0 5px;
       font-size: 1.2em;
+      margin: 10px 0 5px;
     }
 
     .product-item p {
-      color: #888;
       font-size: 0.95em;
+      color: #666;
     }
 
     .price {
@@ -159,7 +180,6 @@
       padding: 40px;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      margin: 40px;
     }
 
     #about h2, #contact h2 {
@@ -167,17 +187,6 @@
       font-size: 2em;
       margin-bottom: 20px;
       color: #3e206d;
-    }
-
-    #about p {
-      font-size: 1em;
-      color: #555;
-      line-height: 1.6;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
     }
 
     input, textarea {
@@ -196,7 +205,6 @@
       font-size: 1em;
       border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s;
     }
 
     button[type="submit"]:hover {
@@ -206,33 +214,39 @@
     footer {
       background: #3e206d;
       color: #fff;
-      padding: 30px 40px;
+      padding: 30px 20px;
       text-align: center;
       font-size: 0.9em;
-      margin-top: 60px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #3e206d;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        width: 200px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      nav a {
+        margin: 10px 0;
+      }
     }
   </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const cartButtons = document.querySelectorAll(".add-to-cart");
-
-      cartButtons.forEach(button => {
-        button.addEventListener("click", () => {
-          const product = button.parentElement.querySelector("h3").textContent;
-          alert(`${product} has been added to your cart!`);
-        });
-      });
-
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function(e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth"
-          });
-        });
-      });
-    });
-  </script>
 </head>
 <body>
   <header>
@@ -240,50 +254,33 @@
       <img src="https://i.pinimg.com/564x/68/ec/e3/68ece3547035aae711908da603bf33c6.jpg" alt="FashionVibe Logo">
       <h1>FashionVibe</h1>
     </div>
-    <nav>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav class="nav-links" id="nav-links">
       <a href="#">Home</a>
       <a href="#products">Products</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
       <div class="header-icons">
-        <img src="https://cdn-icons-png.flaticon.com/512/891/891462.png" alt="Cart">
-        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="User Login">
+        <img src="https://cdn-icons-png.flaticon.com/512/891/891462.png" alt="Cart Icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="Login Icon">
       </div>
     </nav>
   </header>
 
-  <img class="banner" src="https://t3.ftcdn.net/jpg/03/67/56/64/360_F_367566423_XT7p8nSweLhTPMBZkqaDmQXhXujeS4Gq.jpg" alt="Fashion Banner">
+  <img class="banner" src="https://t3.ftcdn.net/jpg/03/67/56/64/360_F_367566423_XT7p8nSweLhTPMBZkqaDmQXhXujeS4Gq.jpg" alt="Fashion Banner" loading="lazy">
 
   <section class="product-grid" id="products">
-    <div class="product-item">
-      <img src="https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/26493998/2024/3/21/ef17cf2d-c388-443b-94b1-a660a1e7e5261711008312277-ONLY-Boxy-Spread-Collar-Casual-Shirt-1051711008312160-15.jpg" alt="Casual Shirt">
-      <h3>Casual Shirt</h3>
-      <p>Comfortable cotton shirt perfect for daily wear.</p>
-      <p class="price">₹799</p>
-      <button class="add-to-cart">Add to Cart</button>
-    </div>
-    <div class="product-item">
-      <img src="https://m.media-amazon.com/images/I/712EkIlVb7L._AC_UY1100_.jpg" alt="Classic Denim Jacket">
-      <h3>Denim Jacket</h3>
-      <p>Stylish and durable denim jacket for a bold look.</p>
-      <p class="price">₹1599</p>
-      <button class="add-to-cart">Add to Cart</button>
-    </div>
-    <div class="product-item">
-      <img src="https://media.istockphoto.com/id/1170648040/photo/beautiful-lady-overjoyed-by-warm-spring-breeze-dream-of-romantic-date-wear-cute-floral-dress.jpg?s=612x612&w=0&k=20&c=UzOoNF1-F6pR5uSu6mTqnPAYR4eg6paDy4FKfhYVInU=" alt="Summer Dress">
-      <h3>Summer Dress</h3>
-      <p>Floral dress made with soft breathable fabric.</p>
-      <p class="price">₹999</p>
-      <button class="add-to-cart">Add to Cart</button>
-    </div>
+    <!-- Products Loaded from JS -->
   </section>
 
   <section id="testimonials" style="background-color: #f9f1ff; padding: 40px; border-radius: 12px; margin: 40px;">
-    <h2 style="font-family: 'Playfair Display', serif; font-size: 2em; color: #3e206d; margin-bottom: 20px;">What Our Customers Say</h2>
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      <blockquote style="font-style: italic; color: #555;">"Loved the summer dress! Great fabric and fit." – Aditi R.</blockquote>
-      <blockquote style="font-style: italic; color: #555;">"Quick delivery and beautiful packaging. Highly recommend!" – Mehul S.</blockquote>
-    </div>
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 2em; color: #3e206d;">What Our Customers Say</h2>
+    <blockquote style="font-style: italic; color: #555;">"Loved the summer dress! Great fabric and fit." – Aditi R.</blockquote>
+    <blockquote style="font-style: italic; color: #555;">"Quick delivery and beautiful packaging. Highly recommend!" – Mehul S.</blockquote>
   </section>
 
   <section style="background: #f3e5f5; padding: 40px; margin: 40px; border-radius: 12px; text-align: center;">
@@ -295,15 +292,7 @@
 
   <section id="about">
     <h2>About Us</h2>
-    <p> Welcome to FashionVibe — your ultimate destination for trendsetting fashion that speaks your language. At FashionVibe, we believe that fashion isn't just about clothes — it's a lifestyle, a personality, and a powerful way to express yourself. Founded with a vision to make contemporary style accessible to everyone, we have grown into a platform where quality meets affordability and elegance blends with comfort.
-        <br><br>
-        Our journey started with a small team of fashion enthusiasts determined to disrupt the norms of the industry by offering curated styles, timeless staples, and seasonal collections all under one roof. Today, Fashion Hub caters to thousands of customers nationwide who trust us for their everyday outfits, special occasions, and fashion-forward looks.
-        <br><br>
-        We are committed to bringing you the finest materials, exceptional craftsmanship, and unique designs sourced from both global and local creators. Every item in our catalog goes through rigorous quality checks to ensure that when you shop with us, you're not just buying clothes — you're investing in confidence.
-        <br><br>
-        What sets us apart is our customer-centric approach. From seamless navigation to smooth checkout and quick delivery, we strive to make your shopping experience delightful at every step. Our responsive support team is always ready to assist you with styling tips, order inquiries, or size recommendations.
-        <br><br>
-        Thank you for being a part of the Fashion Hub family. We invite you to explore, experiment, and express yourself — because at FashionVibe, your style story matters.</p>
+    <p>FashionVibe is your ultimate destination for trendsetting fashion that reflects your personality. Founded with the goal of making contemporary style accessible to all, we bring together elegance and comfort through thoughtfully curated collections. Join us in celebrating style, confidence, and individuality.</p>
   </section>
 
   <section id="contact">
@@ -316,10 +305,71 @@
     </form>
   </section>
 
-  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="position: fixed; bottom: 20px; right: 20px; background: #9c27b0; color: white; border: none; border-radius: 50%; padding: 12px 16px; font-size: 1.2em; cursor: pointer;">↑</button>
+  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+    style="position: fixed; bottom: 20px; right: 20px; background: #9c27b0; color: white; border: none; border-radius: 50%; padding: 12px 16px; font-size: 1.2em; cursor: pointer;">↑</button>
 
   <footer>
     &copy; 2025 FashionVibe. All rights reserved.
   </footer>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("nav-links");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute("href")).scrollIntoView({ behavior: "smooth" });
+        navLinks.classList.remove("active");
+      });
+    });
+
+    // Mocked product catalog (can be replaced with API fetch)
+    const products = [
+      {
+        name: "Casual Shirt",
+        desc: "Comfortable cotton shirt perfect for daily wear.",
+        price: "₹799",
+        img: "https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/26493998/2024/3/21/ef17cf2d-c388-443b-94b1-a660a1e7e5261711008312277-ONLY-Boxy-Spread-Collar-Casual-Shirt-1051711008312160-15.jpg"
+      },
+      {
+        name: "Denim Jacket",
+        desc: "Stylish and durable denim jacket for a bold look.",
+        price: "₹1599",
+        img: "https://m.media-amazon.com/images/I/712EkIlVb7L._AC_UY1100_.jpg"
+      },
+      {
+        name: "Summer Dress",
+        desc: "Floral dress made with soft breathable fabric.",
+        price: "₹999",
+        img: "https://media.istockphoto.com/id/1170648040/photo/beautiful-lady-overjoyed-by-warm-spring-breeze-dream-of-romantic-date-wear-cute-floral-dress.jpg?s=612x612&w=0&k=20&c=UzOoNF1-F6pR5uSu6mTqnPAYR4eg6paDy4FKfhYVInU="
+      }
+    ];
+
+    const productGrid = document.querySelector(".product-grid");
+    products.forEach(p => {
+      productGrid.innerHTML += `
+        <div class="product-item">
+          <img src="${p.img}" alt="${p.name}" loading="lazy">
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <p class="price">${p.price}</p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      `;
+    });
+
+    document.addEventListener("click", e => {
+      if (e.target.classList.contains("add-to-cart")) {
+        const product = e.target.closest(".product-item").querySelector("h3").textContent;
+        alert(`${product} has been added to your cart!`);
+      }
+    });
+  </script>
 </body>
 </html>
